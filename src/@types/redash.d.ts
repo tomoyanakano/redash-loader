@@ -1,12 +1,12 @@
-declare namespace Redash {
-  export type Schedule = {
+
+  export interface Schedule {
       interval: number;
       until?: any;
       day_of_week?: any;
       time?: any;
   }
 
-  export type User = {
+  export interface User {
       auth_type: string;
       is_disabled: boolean;
       updated_at: Date;
@@ -22,11 +22,11 @@ declare namespace Redash {
       email: string;
   }
 
-  export type Options = {
+  export interface Options {
       parameters: any[];
   }
 
-  export type Query = {
+  export interface Query {
       is_archived: boolean;
       retrieved_at: Date;
       updated_at: Date;
@@ -51,10 +51,9 @@ declare namespace Redash {
       options: Options;
   }
 
-  export type QueriesResponse =  {
+  export interface QueriesResponse {
       count: number;
       page: number;
       page_size: number;
       results: Query[];
   }
-}
