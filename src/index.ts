@@ -2,7 +2,7 @@
 
 import "dotenv/config";
 import { Command } from 'commander';
-import { fetchQueries } from './redash/client';
+import { fetchQueries, paginate } from './redash/client';
 import { Query } from "./@types/redash";
 import writeSqlFile from "./writeSqlFile";
 
@@ -21,7 +21,8 @@ program
     const redashUrl = options.redashUrl;
     switch (type) {
       case 'query': {
-        const queries: Query[] = await fetchQueries();
+        const queries: Query[] = await paginate(fetchQueries);
+        console.log(queries)
         queries.map((query: Query) => writeSqlFile(query))
         return console.log(`${queries.length} queries loaded✨`);
       }
