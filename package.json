@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node --files src/index.ts",
+    "cli": "node -r ts-node/register src/index.ts",
     "dev:watch": "ts-node-dev --files --respawn src/index.ts",
     "clean": "rimraf dist/*",
     "tsc": "tsc",
@@ -33,7 +34,9 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
+    "@types/commander": "^2.12.2",
     "axios": "^0.26.1",
+    "commander": "^9.1.0",
     "dotenv": "^16.0.0",
     "json-schema-to-typescript": "^10.1.5"
   }

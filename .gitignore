@@ -70,3 +70,4 @@ typings/
 .next
 
 /dist
+sql/*
