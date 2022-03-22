@@ -1,7 +1,7 @@
 import { Query } from "./@types/redash";
-import fs from "fs";
+import * as fs from "fs";
 
-const writeSqlFile = (query: Query): void => {
+export const writeSqlFile = (query: Query): void => {
   const data = `
   /*
   Name: ${query.name}
@@ -13,10 +13,11 @@ const writeSqlFile = (query: Query): void => {
 
   ${query.query}
   `;
-  fs.writeFile(`./sql/query_${query.id}.sql`, data, (err) => {
-    if (err) throw err;
-    console.log("正常に書き込みが完了しました");
-  });
+  writeFile(`./sql/query_${query.id}/query_${query.id}.sql`, data);
 };
 
-export default writeSqlFile;
+export const writeFile = (filePath: string, data: string) => {
+  return fs.writeFile(filePath, data, (err) => {
+    if (err) throw err;
+  });
+};

@@ -38,6 +38,7 @@
     "axios": "^0.26.1",
     "commander": "^9.1.0",
     "dotenv": "^16.0.0",
-    "json-schema-to-typescript": "^10.1.5"
+    "json-schema-to-typescript": "^10.1.5",
+    "make-dir": "^3.1.0"
   }
 }
