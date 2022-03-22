@@ -39,5 +39,5 @@ It is useful if you would like to control the versions of Redash queries or dash
 Running it continuously with cron or github actions makes it possible.
 
 
-# Contribution
+## Contribution
 please feel free to add issue and create pull request!!
