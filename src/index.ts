@@ -37,8 +37,8 @@ const program = new Command();
 program.version("0.0.1", "-v, --version");
 
 program
-  .command("download <type>")
-  .description("download Redash content")
+  .command("load <type>")
+  .description("load Redash content(type = query, dashboard, all)")
   .requiredOption("-k, --api-key <key>", "input your Redash API KEY")
   .requiredOption("-u, --redash-url <url>", "input your Redash url")
   .action(
@@ -52,8 +52,12 @@ program
           return await loadQuery(client);
         case "dashboard":
           return await loadDashboard(client);
+        case "all":
+          await loadQuery(client);
+          await loadDashboard(client);
+          return;
         default:
-          return console.log(`${type} is not found`);
+          return console.log(`${type} is not found. Please input query, dashboard or all.`);
       }
     }
   );
