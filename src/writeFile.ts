@@ -13,7 +13,7 @@ export const writeSqlFile = (query: Query): void => {
 
   ${query.query}
   `;
-  writeFile(`./sql/query_${query.id}/query_${query.id}.sql`, data);
+  writeFile(`./query/query_${query.id}/query_${query.id}.sql`, data);
 };
 
 export const writeFile = (filePath: string, data: string) => {
