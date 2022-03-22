@@ -29,7 +29,7 @@ Download redash content in current directory like below.
   | |-...
   |-dashboard
   | |-dashboard_${id}
-  | | |-dashboard_${id}.json // json object
+  | | |-dashboard_${id}.json //json object
   | |-...
 ```
 <br>
@@ -37,3 +37,7 @@ Download redash content in current directory like below.
 ## How it helps
 It is useful if you would like to control the versions of Redash queries or dashboards, and also like to backup those.<br>
 Running it continuously with cron or github actions makes it possible.
+
+
+# Contribution
+please feel free to add issue and create pull request!!
