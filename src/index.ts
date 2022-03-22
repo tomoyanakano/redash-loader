@@ -18,12 +18,10 @@ const loadQuery = async (client: RedashClient) => {
     );
   });
   return console.log(`${queries.length} queries loaded✨`);
-}
+};
 
 const loadDashboard = async (client: RedashClient) => {
-  const dashboards = await client.paginate<Dashboard>(
-    client.fetchDashboards
-  );
+  const dashboards = await client.paginate<Dashboard>(client.fetchDashboards);
   dashboards.map(async (dashboard: Dashboard) => {
     await makeDir(`./dashboard/dashboard_${dashboard.id}`);
     writeFile(
@@ -32,7 +30,7 @@ const loadDashboard = async (client: RedashClient) => {
     );
   });
   return console.log(`${dashboards.length} dashboards loaded✨`);
-}
+};
 
 const program = new Command();
 
@@ -50,9 +48,9 @@ program
     ): Promise<void> => {
       const client = new RedashClient(options.apiKey, options.redashUrl);
       switch (type) {
-        case "query": 
+        case "query":
           return await loadQuery(client);
-        case "dashboard": 
+        case "dashboard":
           return await loadDashboard(client);
         default:
           return console.log(`${type} is not found`);
