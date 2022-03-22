@@ -3,8 +3,36 @@
 import "dotenv/config";
 import { Command } from "commander";
 import { Query, Dashboard } from "./@types/redash";
-import writeSqlFile from "./writeSqlFile";
 import { RedashClient } from "./redash/client";
+import { writeFile, writeSqlFile } from "./writeFile";
+import makeDir from "make-dir";
+
+const loadQuery = async (client: RedashClient) => {
+  const queries = await client.paginate<Query>(client.fetchQueries);
+  queries.map(async (query: Query) => {
+    await makeDir(`./query/query_${query.id}`);
+    writeSqlFile(query);
+    writeFile(
+      `./query/query_${query.id}/query_${query.id}.json`,
+      JSON.stringify(query)
+    );
+  });
+  return console.log(`${queries.length} queries loaded✨`);
+}
+
+const loadDashboard = async (client: RedashClient) => {
+  const dashboards = await client.paginate<Dashboard>(
+    client.fetchDashboards
+  );
+  dashboards.map(async (dashboard: Dashboard) => {
+    await makeDir(`./dashboard/dashboard_${dashboard.id}`);
+    writeFile(
+      `./dashboard/dashboard_${dashboard.id}/dashboard_${dashboard.id}.json`,
+      JSON.stringify(dashboard)
+    );
+  });
+  return console.log(`${dashboards.length} dashboards loaded✨`);
+}
 
 const program = new Command();
 
@@ -22,18 +50,10 @@ program
     ): Promise<void> => {
       const client = new RedashClient(options.apiKey, options.redashUrl);
       switch (type) {
-        case "query": {
-          const queries = await client.paginate<Query>(client.fetchQueries);
-          queries.map((query: Query) => writeSqlFile(query));
-          return console.log(`${queries.length} queries loaded✨`);
-        }
-        case "dashboard": {
-          const dashboards = await client.paginate<Dashboard>(
-            client.fetchDashboards
-          );
-          dashboards.map((dashboard: Dashboard) => console.log(dashboard.name));
-          return console.log(`load ${type}が実行されました`);
-        }
+        case "query": 
+          return await loadQuery(client);
+        case "dashboard": 
+          return await loadDashboard(client);
         default:
           return console.log(`${type} is not found`);
       }
