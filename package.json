@@ -25,7 +25,7 @@
   "bin": {
     "redash-loader": "./dist/index.js"
   },
-  "keywords": [],
+  "keywords": ["redash", "query", "cli"],
   "author": "Tomoya Nakano",
   "license": "MIT",
   "devDependencies": {
